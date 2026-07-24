@@ -18,6 +18,9 @@ import DeliveryDriverRoutes from "./src/routes/deliveryDrivers.js"
 import { validateAuthCookie } from "./src/middlewares/authMiddleware.js";
 import eventRoutes from "./src/routes/events.js"
 
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./src/utils/institutotecnicorica-4d6-camviRAW-1.0.0-resolved.json" with { type: "json" };
+
 //Ejecutar express
 const app = express();
 
@@ -50,5 +53,8 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/wompi", wompiRoutes)
 app.use("/api/deliveryDrivers", DeliveryDriverRoutes)
 app.use("/api/events", eventRoutes)
+
+//Endpoint para la documentación de Swagger
+app.use("/api/documentation", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 export default app;
